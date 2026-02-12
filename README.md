@@ -1,2 +1,32 @@
-# GenCodeCalcFX92-Offline-No_ID
-Un Scipt GenCodeFX92 pour les New et Old juste les Old c'est les FX92 + le site de base est https://gencodecalcfx92.netlify.app/ et ce script le fait sans l'ID de la calculatrice
+⚡ GenCodeCalcFX92
+
+Un script GenCodeFX92 compatible avec les versions New et Old.
+
+🧮 Old Version : FX92
+
+🌐 Site officiel : gencodecalcfx92.netlify.app
+
+🔑 Sans ID nécessaire : Ce script fonctionne sans l’ID de la calculatrice
+
+🚀 Fonctionnalités
+
+✅ Génération de codes pour New et Old
+
+✅ Rapidité et simplicité
+
+✅ 100% gratuit
+
+⚙️ Installation
+
+Clonez le dépôt :
+
+git clone https://github.com/ton-compte/GenCodeCalcFX92.git
+
+
+Ouvrez le script et suivez les instructions.
+
+📝 Notes
+
+Ce script est uniquement pour usage éducatif.
+
+Testé sur toutes les versions FX92 Old et New.
