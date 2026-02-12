@@ -16,15 +16,6 @@ Un script GenCodeFX92 compatible avec les versions New et Old.
 
 ✅ 100% gratuit
 
-⚙️ Installation
-
-Clonez le dépôt :
-
-git clone https://github.com/ton-compte/GenCodeCalcFX92.git
-
-
-Ouvrez le script et suivez les instructions.
-
 📝 Notes
 
 Ce script est uniquement pour usage éducatif.
