@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>GenCode FX-92</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: linear-gradient(135deg, #111, #1c1c1c);
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+
+/* Conteneur étape 1 */
+#step1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 40px;
+}
+
+/* Image calculatrice */
+#calcImage {
+    width: 350px;          
+    max-height: 400px;     
+    border-radius: 15px;
+    display: none;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 0px lime;
+}
+
+#calcImage.active {
+    display: block;
+    box-shadow: 0 0 25px lime;
+    transform: scale(1.1);
+}
+
+select, input, button {
+    padding: 10px;
+    margin: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+}
+
+button {
+    cursor: pointer;
+    background-color: lime;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #00ff88;
+}
+
+#step2, #step3, #result {
+    display: none;
+    margin-top: 20px;
+}
+
+#warning {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: none;
+}
+</style>
+
+<noscript>
+    <h2 style="color:red;">⚠️ JavaScript doit être activé pour utiliser ce site.</h2>
+</noscript>
+
+<body>
+
+<h1>
+    GenCodeCalcFX92.netifly.app<br>
+    <br>
+    Le Générateur de code Ultime pour résoudre sa Calculatrice FX 92<br>
+    Par EnzoRedstone117<br>
+    Bug découvert le 1er février
+</h1>
+
+<!-- Étape 1 -->
+<div id="step1">
+
+    <div>
+        <h3>Choisir le modèle</h3>
+        <select id="calculator" onchange="updateImage()">
+            <option value="">-- Sélectionner --</option>
+            <option value="old">FX-92 Old</option>
+            <option value="new">FX-92 New</option>
+        </select>
+        <br>
+        <button onclick="nextStep()">Suivant</button>
+    </div>
+
+    <div>
+        <img id="calcImage" src="">
+    </div>
+
+</div>
+
+<!-- Étape 2 -->
+<div id="step2">
+    <h3>Choisir l'application</h3>
+    <select id="apps"></select>
+    <br>
+    <button onclick="nextStep2()">Suivant</button>
+</div>
+
+<!-- Étape 3 -->
+<div id="step3">
+    <h3>ID Calculatrice</h3>
+    <input type="text" id="calcID" placeholder="XXXX-XXXX-XXXX-XXXX-XXXX-XXXX">
+    <br>
+    <!-- Message d'avertissement -->
+    <div id="warning"></div>
+    <button onclick="generateCode()">Générer</button>
+</div>
+
+<!-- Résultat -->
+<div id="result"></div>
+
+<script>
+
+// Apps par modèle
+const appsData = {
+    old: ["Calcul", "Statistiques", "Table", "Équation", "Vérif", "Ratio"],
+    new: ["Calcul", "Stats", "Tableur", "Tabl fonct", "Équation", "Prod. croix", "Algo", "Math Box"]
+};
+
+// Met à jour l'image selon le modèle choisi
+function updateImage() {
+    const model = document.getElementById("calculator").value;
+    const image = document.getElementById("calcImage");
+
+    if (model === "old") {
+        image.src = "images/fx92-old.png"; 
+        image.classList.add("active");
+    } 
+    else if (model === "new") {
+        image.src = "images/fx92-new.png"; 
+        image.classList.add("active");
+    } 
+    else {
+        image.classList.remove("active");
+    }
+}
+
+// Étape 1 → 2 : génère le menu apps selon le modèle
+function nextStep() {
+    const model = document.getElementById("calculator").value;
+    if (!model) {
+        alert("Veuillez choisir un modèle.");
+        return;
+    }
+
+    const appsSelect = document.getElementById("apps");
+    appsSelect.innerHTML = "";
+
+    appsData[model].forEach(app => {
+        const option = document.createElement("option");
+        option.value = app;
+        option.textContent = app;
+        appsSelect.appendChild(option);
+    });
+
+    document.getElementById("step2").style.display = "block";
+}
+
+// Étape 2 → 3
+function nextStep2() {
+    document.getElementById("step3").style.display = "block";
+}
+
+// Fonction pour générer un code hexadécimal
+function generateRandomHex(length) {
+    const chars = "ABCDEF1234567890";
+    let code = "";
+    for (let i = 0; i < length; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return code;
+}
+
+// Génère le code final
+function generateCode() {
+    const id = document.getElementById("calcID").value.trim();
+    const warningDiv = document.getElementById("warning");
+    const regex = /^[A-Za-z0-9]{4}(-[A-Za-z0-9]{4}){5}$/;
+
+    // Vérifie le format et si l'utilisateur a laissé le placeholder
+    if (!regex.test(id) || id.toUpperCase() === "XXXX-XXXX-XXXX-XXXX-XXXX-XXXX") {
+        warningDiv.textContent = "ID invalide. Veuillez entrer votre vrai ID au format XXXX-XXXX-XXXX-XXXX-XXXX-XXXX si vous nous faites pas confiance utiliser le Script qui demande pas";
+        warningDiv.style.display = "block";
+        return;
+    } else {
+        warningDiv.style.display = "none"; // efface le message si tout est correct
+    }
+
+    const app = document.getElementById("apps").value;
+    const code = generateRandomHex(12); // 12 caractères hexadécimaux
+
+    const resultDiv = document.getElementById("result");
+    resultDiv.innerHTML = `
+        <h2 style="color:lime;">✔ Code généré</h2>
+        <p><strong>Application :</strong> ${app}</p>
+        <p><strong>ID :</strong> ${id}</p>
+        <h3>${code}</h3>
+    `;
+    resultDiv.style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
