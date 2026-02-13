@@ -1,4 +1,5 @@
 GenCodeFX92
+
 Un script GenCodeFX92 compatible avec les versions New et Old.
 
 🌐 Site officiel : gencodecalcfx92.netlify.app
